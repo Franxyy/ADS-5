@@ -47,7 +47,7 @@ std::string infx2pstfx(const std::string& inf) {
     result = result + ' ';
   }
   if (result.length() > 0 && result[result.length() - 1] == ' ') {
-    result = result.substr(0, result.length() - 1);
+    result.pop_back();
   }
   return result;
 }
