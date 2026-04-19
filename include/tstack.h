@@ -2,32 +2,27 @@
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
 
-template<typename T, int size>
+template<typename T, int kSize>
 class TStack {
-  private:
-    T elements[size];
-    int count;
-
-  public:
-    TStack() {
+ private:
+  T elements[kSize];
+  int count;
+ public:
+  TStack() {
     count = 0;
   }
-
   bool isEmpty() {
     return count == 0;
   }
-
   bool isFull() {
-    return count == size;
+    return count == kSize;
   }
-
   void push(T value) {
     if (!isFull()) {
       elements[count] = value;
       count = count + 1;
     }
   }
-
   T pop() {
     if (!isEmpty()) {
       count = count - 1;
@@ -35,7 +30,6 @@ class TStack {
     }
     return T();
   }
-
   T top() {
     if (!isEmpty()) {
       return elements[count - 1];
