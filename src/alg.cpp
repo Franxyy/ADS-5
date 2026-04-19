@@ -12,41 +12,44 @@ int pr(char c) {
 std::string infx2pstfx(const std::string& inf) {
   TStack<char, 100> stack;
   std::string result;
-    for (int i = 0; i < inf.length(); i++) {
-      char c = inf[i];
-      if (c >= '0' && c <= '9') {
-        result = result + c;
-        if (i == inf.length() - 1) {
-          result = result + ' ';
-        } else if (inf[i+1] < '0' || inf[i+1] > '9') {
-          result = result + ' ';
-        }
-      }
-      if (c == '(') {
-        stack.push(c);
-      }
-      if (c == ')') {
-        while (stack.top() != '(') {
-          result = result + stack.pop();
-          result = result + ' ';
-        }
-        stack.pop();
-      }
-      if (c == '+' || c == '-' || c == '*' || c == '/') {
-        while (stack.isEmpty() == false) {
-          if (stack.top() == '(') break;
-            if (pr(stack.top()) < pr(c)) break;
-              result = result + stack.pop();
-              result = result + ' ';
-        }
-        stack.push(c);
+  for (int i = 0; i < inf.length(); i++) {
+    char c = inf[i];
+    if (c >= '0' && c <= '9') {
+      result = result + c;
+      if (i == inf.length() - 1) {
+        result = result + ' ';
+      } else if (inf[i+1] < '0' || inf[i+1] > '9') {
+        result = result + ' ';
       }
     }
-    while (stack.isEmpty() == false) {
-      result = result + stack.pop();
-      result = result + ' ';
+    if (c == '(') {
+      stack.push(c);
     }
-    return result;
+    if (c == ')') {
+      while (stack.top() != '(') {
+        result = result + stack.pop();
+        result = result + ' ';
+      }
+      stack.pop();
+    }
+    if (c == '+' || c == '-' || c == '*' || c == '/') {
+      while (stack.isEmpty() == false) {
+        if (stack.top() == '(') break;
+        if (pr(stack.top()) < pr(c)) break;
+        result = result + stack.pop();
+        result = result + ' ';
+      }
+      stack.push(c);
+    }
+  }
+  while (stack.isEmpty() == false) {
+    result = result + stack.pop();
+    result = result + ' ';
+  }
+  if (result.length() > 0 && result[result.length() - 1] == ' ') {
+    result = result.substr(0, result.length() - 1);
+  }
+  return result;
 }
 
 int eval(const std::string& pref) {
