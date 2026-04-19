@@ -7,6 +7,7 @@ class TStack {
  private:
   T elements[kSize];
   int count;
+
  public:
   TStack() {
     count = 0;
