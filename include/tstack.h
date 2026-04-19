@@ -4,7 +4,44 @@
 
 template<typename T, int size>
 class TStack {
-  // добавьте код стека
+  private:
+    T elements[size];
+    int count;
+
+  public:
+    TStack() {
+    count = 0;
+  }
+
+  bool isEmpty() {
+    return count == 0;
+  }
+
+  bool isFull() {
+    return count == size;
+  }
+
+  void push(T value) {
+    if (!isFull()) {
+      elements[count] = value;
+      count = count + 1;
+    }
+  }
+
+  T pop() {
+    if (!isEmpty()) {
+      count = count - 1;
+      return elements[count];
+    }
+    return T();
+  }
+
+  T top() {
+    if (!isEmpty()) {
+      return elements[count - 1];
+    }
+    return T();
+  }
 };
 
 #endif  // INCLUDE_TSTACK_H_
